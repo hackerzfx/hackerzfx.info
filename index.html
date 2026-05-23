@@ -162,12 +162,35 @@
         .social-card.sc-whatsapp::before{background:#25D366}.social-card.sc-whatsapp:hover .sc-icon{background:#50e07a;border-color:#70e890}.social-card.sc-whatsapp:hover .sc-icon svg{fill:#fff}.social-card.sc-whatsapp:hover .sc-name{color:#fff}.social-card.sc-whatsapp:hover .sc-handle{color:rgba(255,255,255,.7)}
         .social-card.sc-email::before{background:var(--wine-red)}.social-card.sc-email:hover .sc-icon{background:var(--wrr);border-color:var(--wine-red)}.social-card.sc-email:hover .sc-icon svg{fill:#fff}.social-card.sc-email:hover .sc-name{color:#fff}.social-card.sc-email:hover .sc-handle{color:rgba(255,255,255,.7)}
 
-        .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+        .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1);will-change:transform,opacity}
         .reveal.active{opacity:1;transform:translateY(0)}
         .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
         footer{margin-top:10rem;text-align:center;padding-bottom:6rem;border-top:2px solid var(--border-subtle);padding-top:6rem;transition:border-color .6s ease}
-        @media(max-width:1024px){.projects-grid,.protocol-grid,.philosophy-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.arsenal-grid{grid-template-columns:repeat(2,1fr)}.social-grid{grid-template-columns:repeat(2,1fr)}.hero-landscape-full{height:400px;opacity:.2}}
-        @media(max-width:640px){.hero h1{font-size:4.5rem}.section-title{font-size:3.5rem}.stats{grid-template-columns:1fr}.arsenal-grid{grid-template-columns:1fr}.social-grid{grid-template-columns:1fr}.theme-toggle{top:1rem;right:1rem;width:48px;height:48px}}
+        
+        /* Mobile Performance Optimizations */
+        @media(max-width:1024px){
+            .particles, .dotted-trail, .pebble {display:none !important}
+            .projects-grid,.protocol-grid,.philosophy-grid{grid-template-columns:1fr}
+            .stats{grid-template-columns:repeat(2,1fr)}
+            .arsenal-grid{grid-template-columns:repeat(2,1fr)}
+            .social-grid{grid-template-columns:repeat(2,1fr)}
+            .hero-landscape-full{height:400px;opacity:.2}
+        }
+        @media(max-width:640px){
+            .hero h1{font-size:3.5rem;letter-spacing:-2px}
+            .hackerzfx-signature{font-size:1.8rem;top:-1.2rem}
+            .hero p{font-size:1.1rem}
+            .section-title{font-size:2.8rem;margin-bottom:3rem}
+            .stats{grid-template-columns:1fr;margin:4rem 0}
+            .stat-card{padding:2rem 1rem}
+            .stat-number{font-size:2.8rem}
+            .arsenal-grid{grid-template-columns:1fr}
+            .social-grid{grid-template-columns:1fr}
+            .theme-toggle{top:1rem;right:1rem;width:48px;height:48px}
+            .container{padding:2rem 1.25rem}
+            .p-card{padding:2rem}
+            .p-card h3{font-size:2rem}
+        }
     </style>
 </head>
 <body>
