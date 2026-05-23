@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hackerzfx | Hamza Visual Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg-base:#FDFCF6;--bg-card:#FFFFFF;--bg-elevated:#F5F3E7;--border-charcoal:#1A1A1A;--border-subtle:rgba(26,26,26,0.12);--primary-teal:#68c1af;--ptr:104,193,175;--secondary-gold:#D4A017;--sgr:212,160,23;--wine-red:#8B1E3F;--wrr:139,30,63;--text-main:#1A1A1A;--text-muted:#555555;--text-subtle:#888888;--accent-soft:rgba(139,30,63,0.06);--shadow-color:rgba(26,26,26,0.12);--shadow-strong:rgba(26,26,26,0.2);--ts:all 0.5s cubic-bezier(0.16,1,0.3,1);--tb:all 0.6s cubic-bezier(0.34,1.56,0.64,1);--tf:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        [data-theme="dark"]{--bg-base:#0D0D0D;--bg-card:#1A1A1A;--bg-elevated:#222222;--border-charcoal:#F5F3E7;--border-subtle:rgba(245,243,231,0.12);--primary-teal:#7dd4c2;--ptr:125,212,194;--secondary-gold:#e6b82e;--sgr:230,184,46;--wine-red:#c0305a;--wrr:192,48,90;--text-main:#F5F3E7;--text-muted:#999999;--text-subtle:#666666;--accent-soft:rgba(192,48,90,0.1);--shadow-color:rgba(0,0,0,0.4);--shadow-strong:rgba(0,0,0,0.6)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{overflow-x:hidden;scroll-behavior:smooth}
+        ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-base)}::-webkit-scrollbar-thumb{background:var(--text-subtle);border-radius:4px;border:2px solid var(--bg-base)}::-webkit-scrollbar-thumb:hover{background:var(--wine-red)}
+        body{background-color:var(--bg-base);color:var(--text-main);font-family:'Outfit',sans-serif;overflow-x:hidden;width:100%;min-height:100vh;line-height:1.6;transition:background-color .6s ease,color .6s ease}
+        .theme-toggle{position:fixed;top:2rem;right:2rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:var(--bg-card);border:2px solid var(--border-subtle);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tb);box-shadow:0 4px 20px var(--shadow-color)}
+        .theme-toggle:hover{transform:scale(1.1) rotate(15deg);border-color:var(--primary-teal);box-shadow:0 8px 30px rgba(var(--ptr),.3)}
+        .theme-toggle svg{width:24px;height:24px;stroke:var(--text-main);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:var(--tf)}
+        .theme-toggle .icon-sun{display:none}.theme-toggle .icon-moon{display:block}
+        [data-theme="dark"] .theme-toggle .icon-sun{display:block}[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+        
+        .particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+        .particle{position:absolute;border-radius:50%;opacity:.12;animation:pf 20s ease-in-out infinite;transition:opacity 0.6s ease}
+        [data-theme="dark"] .particle{opacity:.22}
+
+        /* Increased Particles - Heavy Wine Red */
+        .particle:nth-child(1){width:400px;height:400px;background:var(--wine-red);top:-5%;left:-5%;filter:blur(100px);animation-duration:30s}
+        .particle:nth-child(2){width:350px;height:350px;background:var(--wine-red);top:30%;right:-10%;filter:blur(90px);animation-delay:-5s;animation-duration:25s}
+        .particle:nth-child(3){width:300px;height:300px;background:var(--secondary-gold);bottom:5%;left:20%;filter:blur(80px);animation-delay:-10s}
+        .particle:nth-child(4){width:450px;height:450px;background:var(--wine-red);bottom:10%;right:5%;filter:blur(110px);animation-delay:-15s;animation-duration:35s}
+        .particle:nth-child(5){width:200px;height:200px;background:var(--wine-red);top:60%;left:0%;filter:blur(60px);animation-delay:-2s}
+        .particle:nth-child(6){width:320px;height:320px;background:var(--primary-teal);bottom:-15%;right:30%;filter:blur(90px);animation-delay:-8s}
+        .particle:nth-child(7){width:280px;height:280px;background:var(--wine-red);top:10%;left:50%;filter:blur(85px);animation-delay:-12s;animation-duration:28s}
+        .particle:nth-child(8){width:250px;height:250px;background:var(--wine-red);bottom:40%;left:40%;filter:blur(75px);animation-delay:-18s}
+        .particle:nth-child(9){width:380px;height:380px;background:var(--wine-red);top:40%;left:20%;filter:blur(95px);animation-delay:-7s;animation-duration:32s}
+        .particle:nth-child(10){width:220px;height:220px;background:var(--wine-red);bottom:0%;left:60%;filter:blur(70px);animation-delay:-4s}
+        .particle:nth-child(11){width:310px;height:310px;background:var(--wine-red);top:70%;right:15%;filter:blur(88px);animation-delay:-22s}
+        .particle:nth-child(12){width:260px;height:260px;background:var(--wine-red);top:0%;right:30%;filter:blur(78px);animation-delay:-14s}
+        .particle:nth-child(13){width:420px;height:420px;background:var(--wine-red);bottom:-10%;left:-5%;filter:blur(105px);animation-delay:-3s;animation-duration:27s}
+        .particle:nth-child(14){width:180px;height:180px;background:var(--secondary-gold);top:15%;right:5%;filter:blur(55px);animation-delay:-19s}
+        .particle:nth-child(15){width:290px;height:290px;background:var(--wine-red);top:50%;right:40%;filter:blur(82px);animation-delay:-11s}
+        .particle:nth-child(16){width:340px;height:340px;background:var(--wine-red);bottom:25%;left:10%;filter:blur(92px);animation-delay:-25s}
+        .particle:nth-child(17){width:230px;height:220px;background:var(--wine-red);top:25%;left:15%;filter:blur(68px);animation-delay:-9s}
+        .particle:nth-child(18){width:360px;height:360px;background:var(--primary-teal);bottom:50%;right:-5%;filter:blur(98px);animation-delay:-16s}
+        .particle:nth-child(19){width:270px;height:270px;background:var(--wine-red);top:85%;left:35%;filter:blur(84px);animation-delay:-28s}
+        .particle:nth-child(20){width:330px;height:330px;background:var(--wine-red);top:5%;right:50%;filter:blur(94px);animation-delay:-13s}
+
+        @keyframes pf{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-40px) scale(1.15)}50%{transform:translate(-30px,60px) scale(.9)}75%{transform:translate(40px,30px) scale(1.08)}}
+        .container{max-width:1300px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:10}
+        .dotted-trail{position:fixed;width:1.5px;height:100%;z-index:0;background-image:linear-gradient(to bottom,var(--border-charcoal) 33%,rgba(255,255,255,0) 0%);background-position:right;background-size:1px 12px;background-repeat:repeat-y;opacity:.06;left:2%}
+        .pebble{position:fixed;width:12px;height:12px;background:var(--wine-red);opacity:.12;z-index:0;animation:pp 4s ease-in-out infinite}
+        .pebble.p1{top:15%;left:80%;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;animation-delay:0s}
+        .pebble.p2{top:45%;left:15%;border-radius:60% 40% 30% 70%;animation-delay:-1.5s}
+        .pebble.p3{top:85%;left:85%;width:15px;height:15px;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;animation-delay:-3s}
+        @keyframes pp{0%,100%{transform:scale(1);opacity:.12}50%{transform:scale(1.3);opacity:.22}}
+        
+        /* COLOR FLOW ANIMATION */
+        @keyframes colorFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .color-flow-text {
+            background: linear-gradient(90deg, var(--primary-teal), var(--wine-red), var(--secondary-gold), var(--wine-red), var(--primary-teal));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorFlow 6s ease infinite;
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), filter 0.4s ease;
+            display: inline-block;
+        }
+
+        .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;position:relative;padding-bottom:200px}
+        .branding{position:relative;margin-bottom:2.5rem}
+        .hackerzfx-signature{font-family:'Caveat',cursive;font-size:2.5rem;color:var(--wine-red);position:absolute;top:-1.75rem;left:.5rem;letter-spacing:1px;transform:rotate(-3deg);z-index:5;white-space:nowrap;display:inline-block;transition:color .6s ease}
+        .hero h1{font-family:'Playfair Display',serif;font-size:clamp(5rem,15vw,11rem);line-height:.85;font-weight:800;letter-spacing:-4px;color:var(--text-main);position:relative;text-shadow:2px 2px 20px var(--bg-base);transform:perspective(1000px) rotateY(-8deg) skewY(-1deg);transform-origin:left center;transition:var(--ts),color .6s ease,text-shadow .6s ease;cursor:default}
+        .hero h1:hover{transform:perspective(1000px) rotateY(0deg) skewY(0deg)}
+        .hero h1 .char{display:inline-block;opacity:0;transform:translateY(60px) rotateX(-40deg);animation:hcr .8s cubic-bezier(.16,1,.3,1) forwards}
+        @keyframes hcr{to{opacity:1;transform:translateY(0) rotateX(0)}}
+        .hero p{font-size:1.6rem;color:var(--text-muted);max-width:600px;margin-bottom:4rem;font-style:italic;font-family:'Playfair Display',serif;line-height:1.35;position:relative;background:linear-gradient(90deg,var(--bg-base),transparent);padding-right:2rem;transition:color .6s ease,background .6s ease}
+        .hero-landscape-full{position:absolute;top:5%;left:50%;transform:translateX(-50%);width:90%;height:800px;background-image:url('hero_artisan.png');background-size:contain;background-position:center;background-repeat:no-repeat;z-index:-5;opacity:.55;filter:drop-shadow(0 0 20px rgba(0,0,0,.05));mask-image:linear-gradient(to bottom,transparent 0%,black 15%,black 85%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 15%,black 85%,transparent 100%);transition:opacity .6s ease}
+        [data-theme="dark"] .hero-landscape-full{opacity:.3;filter:drop-shadow(0 0 30px rgba(var(--ptr),.1));background-image:url('dark_bg.png');mask-image:linear-gradient(to bottom,transparent 0%,black 3%,black 97%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 3%,black 97%,transparent 100%)}
+        .btn{padding:1.25rem 3.5rem;background:var(--bg-card);border:2.5px solid var(--border-charcoal);border-radius:4px;color:var(--text-main);font-weight:800;font-family:'Outfit',sans-serif;text-transform:uppercase;letter-spacing:3px;transition:var(--tf);position:relative;cursor:pointer;box-shadow:6px 6px 0 var(--border-charcoal);text-decoration:none;display:inline-block;overflow:hidden}
+        .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(var(--ptr),.15),transparent);transition:left .6s ease}
+        .btn:hover::before{left:100%}.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--border-charcoal);background:var(--wine-red);color:var(--bg-base);border-color:var(--wine-red)}
+        .btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--border-charcoal)}
+        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin:8rem 0}
+        .stat-card{background:var(--bg-card);border:2px solid var(--border-subtle);padding:3rem 1.5rem;border-radius:4px;transition:var(--ts);box-shadow:8px 8px 0 var(--shadow-color);text-align:center;position:relative;overflow:hidden}
+        .stat-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--primary-teal),var(--wine-red),var(--secondary-gold));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+        .stat-card:hover::after{transform:scaleX(1)}.stat-card:hover{transform:translateY(-8px);box-shadow:16px 16px 0 var(--shadow-strong);border-color:var(--border-charcoal)}
+        .stat-number{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:800;margin-bottom:.5rem;line-height:1;transition:color .6s ease}
+        .stat-label{color:var(--text-muted);font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:color .6s ease}
+        .section-tag{font-size:.85rem;font-weight:800;letter-spacing:4px;color:var(--secondary-gold);text-transform:uppercase;margin-bottom:1.5rem;display:block;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        .section-tag:hover{letter-spacing:8px;color:var(--wine-red);transform:translateX(10px)}
+        .section-title{font-family:'Playfair Display',serif;font-size:4.5rem;margin-bottom:6rem;font-weight:800;letter-spacing:-2px;transform:perspective(800px) rotateX(10deg);transform-origin:bottom;transition:color .6s ease}
+        .protocol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
+        .protocol-card{background:var(--bg-card);position:relative;padding:2.5rem 2rem;border:2px solid var(--border-subtle);transition:var(--tb);border-radius:4px;box-shadow:8px 8px 0 var(--shadow-color)}
+        .protocol-card:hover{transform:translate(-8px,-8px);box-shadow:16px 16px 0 var(--shadow-strong);border-color:var(--border-charcoal);background:var(--bg-elevated)}
+        .protocol-card h4{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:1rem;transition:all 0.4s ease}
+        .protocol-card p{color:var(--text-muted);font-size:1rem;line-height:1.6;transition:all 0.4s ease}
+        .protocol-card:hover h4{transform:scale(1.1);animation: colorFlow 2s ease infinite;filter: drop-shadow(0 0 10px var(--wine-red))}
+        .protocol-card:hover p{color:var(--text-main);transform:translateY(-5px)}
+        .step-num{font-size:.8rem;font-weight:800;color:var(--wine-red);margin-bottom:.5rem;display:block;transition:color .6s ease}
+        .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4rem}
+        .project-card{background:var(--bg-card);border:2px solid var(--border-subtle);border-radius:4px;overflow:hidden;transition:var(--ts);position:relative;box-shadow:8px 8px 0 var(--shadow-color)}
+        .project-card:hover{transform:translate(-8px,-8px);box-shadow:16px 16px 0 var(--shadow-strong);border-color:var(--border-charcoal)}
+        .project-image{height:240px;background:var(--bg-elevated);border-bottom:2px solid var(--border-subtle);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;transition:border-color .6s ease}
+        .project-image::before{content:'TECH_PROTOCOL';position:absolute;top:10px;right:15px;font-size:.6rem;font-weight:800;letter-spacing:2px;opacity:.3;color:var(--text-main);transition:color .6s ease}
+        .project-image img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:.6s ease;opacity:.9}
+        .project-card:hover .project-image img{filter:grayscale(0);opacity:1;transform:scale(1.05)}
+        .project-content{padding:1.5rem 2rem;position:relative;min-height:200px;display:flex;flex-direction:column;justify-content:center}
+        .project-card h3{font-family:'Playfair Display',serif;font-size:2.2rem;margin-bottom:.75rem;font-weight:800;position:relative;z-index:2;transition:all 0.4s ease}
+        .project-card p{color:var(--text-muted);font-size:1rem;position:relative;z-index:2;line-height:1.4;max-width:90%;transition:all 0.4s ease}
+        .project-card:hover h3{transform:scale(1.05) translateY(-5px);animation: colorFlow 2s ease infinite;letter-spacing:1px}
+        .project-card:hover p{color:var(--text-main);transform:translateY(-3px)}
+        .project-letter{position:absolute;bottom:0;right:15px;font-family:'Playfair Display',serif;font-size:10rem;font-weight:800;line-height:.8;opacity:.03;z-index:1;pointer-events:none;transition:color .6s ease}
+        .project-tags{position:relative;z-index:2;margin-bottom:.5rem}
+        .tag{background:var(--accent-soft);color:var(--wine-red);padding:.3rem 1rem;border-radius:2px;font-size:.7rem;font-weight:800;text-transform:uppercase;border:1px solid var(--wine-red);margin-right:.5rem;transition:var(--tf)}
+        .project-card:hover .tag{background:rgba(var(--wrr),.15)}
+        .corner-mark{position:absolute;width:4px;height:4px;border:1px solid var(--border-charcoal);opacity:.15;transition:opacity .3s ease,border-color .6s ease}
+        .project-card:hover .corner-mark{opacity:.4}
+        .cm-tl{top:10px;left:10px;border-right:none;border-bottom:none}.cm-br{bottom:10px;right:10px;border-left:none;border-top:none}
+        .arsenal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem;width:100%}
+        .tool-card{position:relative;overflow:hidden;z-index:1;border:1.5px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;height:100px;width:100%;padding:1.5rem;text-align:center;border-radius:4px;transition:var(--ts);font-weight:700;text-transform:uppercase;font-size:.85rem;background:var(--bg-card);box-sizing:border-box;cursor:pointer;box-shadow:6px 6px 0 var(--shadow-color)}
+        .tool-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--wine-red);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.16,1,.3,1);z-index:-1}
+        .tool-card:hover::before{transform:scaleX(1);transform-origin:left}
+        .tool-card:hover{color:#fff;border-color:var(--wine-red);transform:translateY(-5px);box-shadow:12px 12px 0 var(--shadow-color)}
+        .philosophy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin:10rem 0}
+        .p-card{background:var(--bg-card);border:2.5px solid var(--border-subtle);padding:4rem;border-radius:4px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;z-index:1;transition:var(--ts);cursor:pointer;box-shadow:10px 10px 0 var(--shadow-color)}
+        .p-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--wine-red);transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.16,1,.3,1);z-index:-1}
+        .p-card:hover::before{transform:scaleX(1);transform-origin:left}
+        .p-card:hover{color:#fff;transform:translateY(-8px);box-shadow:20px 20px 0 var(--shadow-strong)}
+        .p-card:hover h3{color:#fff}.p-card:hover p{color:rgba(255,255,255,.8)}
+        .p-card.red-anchor::before{background:var(--secondary-gold)}
+        .p-card.red-anchor:hover{color:var(--text-main)}.p-card.red-anchor:hover h3,.p-card.red-anchor:hover p{color:var(--text-main)}
+        .p-card h3{font-family:'Playfair Display',serif;font-size:2.75rem;margin-bottom:1.5rem;transition:color .4s ease}
+        .p-card p{font-size:1.2rem;color:var(--text-muted);transition:color .4s ease}
+
+        /* SOCIAL LINKS */
+        .social-section{margin:8rem 0 4rem}
+        .social-grid{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:4rem;justify-content:center}
+        .social-card{display:flex;align-items:center;gap:1.25rem;padding:1.75rem 2rem;background:var(--bg-card);border:2px solid var(--border-subtle);border-radius:4px;text-decoration:none;color:var(--text-main);transition:var(--ts);position:relative;overflow:hidden;cursor:pointer;box-shadow:6px 6px 0 var(--shadow-color);flex:0 1 400px;min-width:320px}
+        .social-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.16,1,.3,1);z-index:0}
+        .social-card:hover::before{transform:scaleX(1);transform-origin:left}
+        .social-card>*{position:relative;z-index:1}
+        .social-card .sc-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--bg-elevated);border:1.5px solid var(--border-subtle);transition:var(--tf);flex-shrink:0}
+        .social-card .sc-icon svg{width:22px;height:22px;fill:var(--text-main);transition:var(--tf)}
+        .social-card .sc-info{flex:1;min-width:0}
+        .social-card .sc-name{font-weight:700;font-size:1rem;letter-spacing:.5px;transition:color .3s ease}
+        .social-card .sc-handle{font-size:.8rem;color:var(--text-muted);transition:color .3s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .social-card .sc-arrow{width:20px;height:20px;opacity:0;transform:translateX(-10px);transition:var(--tf)}
+        .social-card .sc-arrow svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .social-card:hover .sc-arrow{opacity:1;transform:translateX(0)}
+        .social-card:hover{transform:translateY(-4px);box-shadow:12px 12px 0 var(--shadow-color);border-color:var(--border-charcoal)}
+        .social-card.sc-github::before{background:#333}.social-card.sc-github:hover .sc-icon{background:#555;border-color:#777}.social-card.sc-github:hover .sc-icon svg{fill:#fff}.social-card.sc-github:hover .sc-name{color:#fff}.social-card.sc-github:hover .sc-handle{color:rgba(255,255,255,.7)}
+        .social-card.sc-facebook::before{background:#1877F2}.social-card.sc-facebook:hover .sc-icon{background:#4a90f5;border-color:#6aa5f7}.social-card.sc-facebook:hover .sc-icon svg{fill:#fff}.social-card.sc-facebook:hover .sc-name{color:#fff}.social-card.sc-facebook:hover .sc-handle{color:rgba(255,255,255,.7)}
+        .social-card.sc-instagram::before{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}.social-card.sc-instagram:hover .sc-icon{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}.social-card.sc-instagram:hover .sc-icon svg{fill:#fff}.social-card.sc-instagram:hover .sc-name{color:#fff}.social-card.sc-instagram:hover .sc-handle{color:rgba(255,255,255,.7)}
+        .social-card.sc-snapchat::before{background:#FFFC00}.social-card.sc-snapchat:hover .sc-icon{background:rgba(0,0,0,.1);border-color:rgba(0,0,0,.2)}.social-card.sc-snapchat:hover .sc-icon svg{fill:#000}.social-card.sc-snapchat:hover{color:#000}.social-card.sc-snapchat:hover .sc-name{color:#000}.social-card.sc-snapchat:hover .sc-handle{color:rgba(0,0,0,.6)}
+        .social-card.sc-linkedin::before{background:#0A66C2}.social-card.sc-linkedin:hover .sc-icon{background:#3a85d1;border-color:#5a9adf}.social-card.sc-linkedin:hover .sc-icon svg{fill:#fff}.social-card.sc-linkedin:hover .sc-name{color:#fff}.social-card.sc-linkedin:hover .sc-handle{color:rgba(255,255,255,.7)}
+        .social-card.sc-whatsapp::before{background:#25D366}.social-card.sc-whatsapp:hover .sc-icon{background:#50e07a;border-color:#70e890}.social-card.sc-whatsapp:hover .sc-icon svg{fill:#fff}.social-card.sc-whatsapp:hover .sc-name{color:#fff}.social-card.sc-whatsapp:hover .sc-handle{color:rgba(255,255,255,.7)}
+        .social-card.sc-email::before{background:var(--wine-red)}.social-card.sc-email:hover .sc-icon{background:var(--wrr);border-color:var(--wine-red)}.social-card.sc-email:hover .sc-icon svg{fill:#fff}.social-card.sc-email:hover .sc-name{color:#fff}.social-card.sc-email:hover .sc-handle{color:rgba(255,255,255,.7)}
+
+        .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+        .reveal.active{opacity:1;transform:translateY(0)}
+        .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+        footer{margin-top:10rem;text-align:center;padding-bottom:6rem;border-top:2px solid var(--border-subtle);padding-top:6rem;transition:border-color .6s ease}
+        @media(max-width:1024px){.projects-grid,.protocol-grid,.philosophy-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.arsenal-grid{grid-template-columns:repeat(2,1fr)}.social-grid{grid-template-columns:repeat(2,1fr)}.hero-landscape-full{height:400px;opacity:.2}}
+        @media(max-width:640px){.hero h1{font-size:4.5rem}.section-title{font-size:3.5rem}.stats{grid-template-columns:1fr}.arsenal-grid{grid-template-columns:1fr}.social-grid{grid-template-columns:1fr}.theme-toggle{top:1rem;right:1rem;width:48px;height:48px}}
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div class="particles">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+    <div class="dotted-trail"></div>
+    <div class="pebble p1"></div><div class="pebble p2"></div><div class="pebble p3"></div>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-landscape-full"></div>
+            <div class="branding reveal"><span class="hackerzfx-signature">hackerzfx</span><h1>HAMZA</h1></div>
+            <p class="reveal reveal-delay-1">Digital Artistry &amp; High-Performance Protocols. Architecting the future with precision, scaling the present with purpose.</p>
+            <div style="display:flex;gap:2rem;align-items:center;" class="reveal reveal-delay-2"><a href="#projects" class="btn">Protocol Access</a></div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card reveal"><div class="stat-number">05</div><div class="stat-label">Years Crafting</div></div>
+            <div class="stat-card reveal reveal-delay-1"><div class="stat-number">50+</div><div class="stat-label">Works Released</div></div>
+            <div class="stat-card reveal reveal-delay-2"><div class="stat-number">99%</div><div class="stat-label">System Uptime</div></div>
+            <div class="stat-card reveal reveal-delay-3" style="border-color:var(--wine-red)"><div class="stat-number" style="color:var(--wine-red)">24/7</div><div class="stat-label">Active Monitoring</div></div>
+        </section>
+
+        <section class="protocol-section">
+            <span class="section-tag reveal">Engineering Methodology</span>
+            <h2 class="section-title reveal">The Protocol</h2>
+            <div class="protocol-grid">
+                <div class="protocol-card reveal"><span class="step-num">01</span><h4 class="color-flow-text">Inquiry</h4><p>Submitting deep audits of requirements. Mapping technical landscapes before deployment starts.</p></div>
+                <div class="protocol-card reveal reveal-delay-1"><span class="step-num">02</span><h4 class="color-flow-text">Synthesis</h4><p>Fusing performance logic with premium design. Where code transforms into visual artistry.</p></div>
+                <div class="protocol-card reveal reveal-delay-2"><span class="step-num">03</span><h4 class="color-flow-text">Execution</h4><p>Surgical implementation. Multi-threaded processing and parallel state management scaling.</p></div>
+                <div class="protocol-card reveal reveal-delay-3"><span class="step-num">04</span><h4 class="color-flow-text">Stability</h4><p>Ensuring absolute uptime. Continuous refinement protocols for permanent digital security.</p></div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <span class="section-tag reveal">Curated Archive</span>
+            <h2 class="section-title reveal">Selected Protocols</h2>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="corner-mark cm-tl"></div>
+                    <div class="project-image"><img src="hackerzfx.png" alt="Batch Sender"></div>
+                    <div class="project-content"><div class="project-letter">BS</div><div class="project-tags"><span class="tag">Automation</span><span class="tag">Next.js</span></div><h3 class="color-flow-text">Batch Sender</h3><p>High-concurrency Facebook Messenger bulk engine. Advanced chunking and rate-limit handling for parallel delivery.</p></div>
+                    <div class="corner-mark cm-br"></div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="corner-mark cm-tl"></div>
+                    <div class="project-image"><svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--border-charcoal)" stroke-width="0.6"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                    <div class="project-content"><div class="project-letter">WR</div><div class="project-tags"><span class="tag">Media</span><span class="tag">Security</span></div><h3 class="color-flow-text">WelloRecorder</h3><p>Powerful screen recorder with DRM bypass capability for educational content archival across protected platforms.</p></div>
+                    <div class="corner-mark cm-br"></div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="corner-mark cm-tl"></div>
+                    <div class="project-image"><svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--border-charcoal)" stroke-width="0.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+                    <div class="project-content"><div class="project-letter">YT</div><div class="project-tags"><span class="tag">Media</span><span class="tag">Termux</span></div><h3 class="color-flow-text">YT-DL Protocol</h3><p>Elite YouTube extraction suite. Supporting 1080p archival with parallel MP3/MP4 processing and auto-setup.</p></div>
+                    <div class="corner-mark cm-br"></div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="corner-mark cm-tl"></div>
+                    <div class="project-image"><svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="var(--border-charcoal)" stroke-width="0.7"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+                    <div class="project-content"><div class="project-letter">WH</div><div class="project-tags"><span class="tag">Security</span><span class="tag">Bash</span></div><h3 class="color-flow-text">wifi-hacker</h3><p>Automated security audit suite for wireless protocols. Multi-vector vulnerability analysis for WEP, WPS, and WPA2.</p></div>
+                    <div class="corner-mark cm-br"></div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="corner-mark cm-tl"></div>
+                    <div class="project-image"><svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="var(--border-charcoal)" stroke-width="0.7"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="2" y1="17" x2="22" y2="17"/></svg></div>
+                    <div class="project-content"><div class="project-letter">MS</div><div class="project-tags"><span class="tag">System</span><span class="tag">PowerShell</span></div><h3 class="color-flow-text">Mission Control</h3><p>Custom Windows environment optimization. Debloating and streamlining for maximum developer performance.</p></div>
+                    <div class="corner-mark cm-br"></div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="corner-mark cm-tl"></div>
+                    <div class="project-image"><svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="var(--border-charcoal)" stroke-width="0.7"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                    <div class="project-content"><div class="project-letter">PE</div><div class="project-tags"><span class="tag">Logic</span><span class="tag">Architecture</span></div><h3 class="color-flow-text">Protocol Engine</h3><p>High-performance backend core for stateful application management and large-scale data synchronization.</p></div>
+                    <div class="corner-mark cm-br"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="arsenal-section">
+            <span class="section-tag reveal">Tech Stack</span>
+            <h2 class="section-title reveal">The Arsenal</h2>
+            <div class="arsenal-grid">
+                <div class="tool-card reveal">Next.js 14</div>
+                <div class="tool-card reveal">TypeScript</div>
+                <div class="tool-card reveal">Python</div>
+                <div class="tool-card reveal">Node.js</div>
+                <div class="tool-card reveal">Tailwind</div>
+                <div class="tool-card reveal">MongoDB</div>
+                <div class="tool-card reveal">Bash/Shell</div>
+                <div class="tool-card reveal">Security Auditing</div>
+            </div>
+        </section>
+
+        <section class="philosophy-section">
+            <span class="section-tag reveal">Core Principles</span>
+            <h2 class="section-title reveal">The Philosophy</h2>
+            <div class="philosophy-grid">
+                <div class="p-card reveal">
+                    <h3>Absolute Quality</h3>
+                    <p>Compromise is the precursor to failure. Every protocol must be implemented with surgical precision and aesthetic integrity.</p>
+                </div>
+                <div class="p-card red-anchor reveal">
+                    <h3>Continuous Evolution</h3>
+                    <p>The digital landscape is a living organism. Adaptation is not an option—it is a requirement for survival and dominance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section" id="connect">
+            <span class="section-tag reveal">Encryption channels</span>
+            <h2 class="section-title reveal">Connect Protocol</h2>
+            <div class="social-grid">
+                <a href="https://github.com/hackerzfx" class="social-card sc-github reveal">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-11.5 5.373-11.5 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-4.873-12-11.5-12"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">GitHub</div><div class="sc-handle">@hackerzfx</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+                <a href="https://www.facebook.com/hackerzfx.hamza" class="social-card sc-facebook reveal reveal-delay-1">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">Facebook</div><div class="sc-handle">@hackerzfx.hamza</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+                <a href="https://instagram.com/hackerzfx" class="social-card sc-instagram reveal reveal-delay-2">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">Instagram</div><div class="sc-handle">@hackerzfx</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+                <a href="https://www.snapchat.com/add/hackerzfx?share_id=W-QOxNwQmJs&locale=en-US" class="social-card sc-snapchat reveal">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M12.126 1.488c-1.39 0-2.457.214-3.176.637-.625.352-1.077.893-1.328 1.623-.19.553-.29 1.135-.306 1.745-.045 1.545.283 2.973 1.002 4.363-.092.05-.183.1-.274.148-.71.38-1.503.738-2.348 1.037a3.001 3.001 0 0 1-.782.164 1.157 1.157 0 0 1-.84-.282.871.871 0 0 1-.295-.62c-.02-.27.054-.537.2-.767.115-.178.27-.323.447-.426a.56.56 0 0 0 .153-.787.571.571 0 0 0-.796-.153c-.347.198-.646.47-.872.8-.293.43-.446.945-.443 1.472.003.528.16 1.042.456 1.468.293.424.7.747 1.18.94.482.194 1.006.257 1.517.185a5.578 5.578 0 0 0 1.258-.337c.783-.284 1.53-.63 2.228-1.026.082-.047.164-.094.246-.14.288 1.41.97 2.68 1.96 3.66.196.196.386.37.568.528-.426.117-.83.255-1.21.41-1.385.578-2.618 1.423-3.618 2.476a.564.564 0 0 0 .044.802.585.585 0 0 0 .807-.043c.895-.944 1.996-1.705 3.235-2.224.236-.1.482-.186.732-.26-.145.474-.216.974-.206 1.477.014.773.197 1.528.532 2.204a3.13 3.13 0 0 0 1.43 1.34c.54.26 1.127.393 1.722.392.595 0 1.182-.132 1.722-.392a3.13 3.13 0 0 0 1.43-1.34c.335-.676.518-1.43.532-2.204.01-.503-.06-1.003-.206-1.477.25.074.496.16.732.26 1.24.52 2.34 1.28 3.235 2.224a.585.585 0 0 0 .807.043.564.564 0 0 0 .044-.802c-1-1.053-2.233-1.898-3.618-2.476-.38-.155-.784-.293-1.21-.41.182-.158.372-.332.568-.528.99-.98 1.672-2.25 1.96-3.66.082.046.164.093.246.14.698.396 1.445.742 2.228 1.026.41.15.83.264 1.258.337.51.072 1.035.01 1.517-.185.48-.193.887-.516 1.18-.94.296-.426.453-.944.456-1.468.003-.527-.15-1.042-.443-1.472-.226-.33-.525-.602-.872-.8a.571.571 0 0 0-.796.153.56.56 0 0 0 .153.787c.177.103.332.248.447.426.146.23.22.497.2.767-.02.26-.128.502-.295.62a1.157 1.157 0 0 1-.84.282 3.001 3.001 0 0 1-.782-.164c-.845-.3-1.638-.657-2.348-1.037-.09-.048-.182-.098-.274-.148.72-1.39 1.047-2.818 1.002-4.363-.016-.61-.116-1.192-.306-1.745-.25-.73-.703-1.27-1.328-1.623-.72-.423-1.786-.637-3.176-.637z"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">Snapchat</div><div class="sc-handle">@hackerzfx</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+                <a href="https://linkedin.com/in/hackerzfx" class="social-card sc-linkedin reveal reveal-delay-1">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">LinkedIn</div><div class="sc-handle">Hamza</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+                <a href="https://wa.me/+923464202780" class="social-card sc-whatsapp reveal reveal-delay-2">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.052 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">WhatsApp</div><div class="sc-handle">+92 346 4202780</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+                <a href="mailto:ah5209395@gmail.com" class="social-card sc-email reveal">
+                    <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                    <div class="sc-info"><div class="sc-name">Email</div><div class="sc-handle">ah5209395@gmail.com</div></div>
+                    <div class="sc-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p class="reveal">&copy; 2026 HACKERZFX. All Rights Reserved. Engineered with Passion.</p>
+        </footer>
+    </div>
+
+    <script>
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Theme Management
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Scroll Reveals
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight * 0.9) el.classList.add('active');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Char Animation for Hero
+        const heroH1 = document.querySelector('.hero h1');
+        const text = heroH1.textContent;
+        heroH1.textContent = '';
+        [...text].forEach((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.className = 'char';
+            span.style.animationDelay = `${i * 0.1}s`;
+            heroH1.appendChild(span);
+        });
+    </script>
+</body>
+</html>
